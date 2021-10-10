@@ -63,7 +63,7 @@ ubuntu_install_reuirements:
 
 ubuntu_zsh_clear:
   echo -e "\n\n\033[0;96m\t ZSH clearing... \033[0m\n\n" && \
-  sudo rm -rf $(ls -a | grep zsh)
+  sudo rm -rf $(ls -a | grep zsh) && \
   echo -e "\n\n\033[0;92m\t ZSH clearing success! \033[0m"
 
 ubuntu_zsh_install:
@@ -81,7 +81,7 @@ ubuntu_zsh_full: ubuntu_zsh_clear ubuntu_zsh_install ubuntu_zsh_setup
 
 ubuntu_tmux_clear:
   echo -e "\n\n\033[0;96m\t TMUX clearing... \033[0m\n\n" && \
-  sudo rm -rf ~/.tmux && \
+  sudo rm -rf $(ls -a | grep tmux) && \
   echo -e "\n\n\033[0;92m\t TMUX clearing success! \033[0m"
 
 ubuntu_tmux_install:
@@ -99,10 +99,7 @@ ubuntu_tmux_full: ubuntu_tmux_clear ubuntu_tmux_install ubuntu_tmux_setup
 
 ubuntu_vim_clear:
   echo -e "\n\n\033[0;96m\t VIM clearing... \033[0m\n\n" && \
-  sudo rm -rf \
-      ~/.vim/bundle/Vundle.vim \
-      ~/.vimrc \
-      && \
+  sudo rm -rf $(ls -a | grep vim) && \
   echo -e "\n\n\033[0;92m\t VIM clearing success! \033[0m"
 
 ubuntu_vim_install:
@@ -113,12 +110,6 @@ ubuntu_vim_install:
 
 ubuntu_vim_setup:
   echo -e "\n\033[0;96m\t VIM setuping... \033[0m\n" && \
-  sudo rm -rf \
-      ~/.vim/bundle/Vundle.vim \
-      ~/.vimrc \
-      && \
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
-  curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc && \
   vim +PluginInstall +qall && \
   echo -e "\n\033[0;92m\t VIM setuping success! \033[0m\n"
 
