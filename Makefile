@@ -1,4 +1,7 @@
-all: start system_update install_reuirements zsh_full tmux_full vim_full finish
+all:
+  echo "Hello, World!"
+
+ubuntu_all: start ubuntu_system_update ubuntu_install_reuirements ubuntu_zsh_full ubuntu_tmux_full ubuntu_vim_full finish
   
 start:
   echo -e "\033[0;96m Process started... \033[0m\n"
@@ -6,7 +9,7 @@ start:
 finish:
   echo -e "\n\033[0;92m Process success! \033[0m"  
   
-system_update:
+ubuntu_system_update:
   echo -e "\n\033[0;96m\t Updating system... \033[0m\n" && \
   sudo apt update && \
   sudo apt -y upgrade && \
@@ -14,7 +17,7 @@ system_update:
   sudo apt -y autoremove
   echo -e "\n\033[0;92m\t Updating system success! \033[0m\n" && \
   
-install_reuirements:
+ubuntu_install_reuirements:
   echo -e "\n\033[0;96m\t Installing required packages... \033[0m\n" && \
   sudo apt install -y gcc && \
   sudo apt install -y git && \
@@ -58,43 +61,43 @@ install_reuirements:
   sudo apt install -y libcurl4-openssl-dev && \
   echo -e "\n\033[0;92m\t Installing required packages success! \033[0m\n"
 
-zsh_clear:
+ubuntu_zsh_clear:
   echo -e "\n\n\033[0;96m\t ZSH clearing... \033[0m\n\n" && \
   sudo rm -rf $(ls -a | grep zsh)
   echo -e "\n\n\033[0;92m\t ZSH clearing success! \033[0m"
 
-zsh_install:
+ubuntu_zsh_install:
   echo -e "\n\n\033[0;96m\t ZSH installing... \033[0m\n\n" && \
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
   echo -e "\n\n\033[0;92m\t ZSH installing success! \033[0m"
 
-zsh_setup:
+ubuntu_zsh_setup:
   echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
   chsh -s $(which zsh) && \
   echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc
   echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
   
-zsh_full: zsh_clear zsh_install zsh_setup
+ubuntu_zsh_full: ubuntu_zsh_clear ubuntu_zsh_install ubuntu_zsh_setup
 
-tmux_clear:
+ubuntu_tmux_clear:
   echo -e "\n\n\033[0;96m\t TMUX clearing... \033[0m\n\n" && \
   sudo rm -rf ~/.tmux && \
   echo -e "\n\n\033[0;92m\t TMUX clearing success! \033[0m"
 
-tmux_install:
+ubuntu_tmux_install:
   echo -e "\n\n\033[0;96m\t TMUX installing... \033[0m\n\n" && \
   git clone https://github.com/gpakosz/.tmux.git && \
   echo -e "\n\n\033[0;92m\t TMUX installing success! \033[0m"
 
-tmux_setup:
+ubuntu_tmux_setup:
   echo -e "\n\033[0;96m\t TMUX setuping... \033[0m\n" && \
   sudo ln -s -f .tmux/.tmux.conf && \
   sudo cp .tmux/.tmux.conf.local . && \
   echo -e "\n\033[0;92m\t TMUX setuping success! \033[0m\n"
   
-tmux_full: tmux_clear tmux_install tmux_setup
+ubuntu_tmux_full: ubuntu_tmux_clear ubuntu_tmux_install ubuntu_tmux_setup
 
-vim_clear:
+ubuntu_vim_clear:
   echo -e "\n\n\033[0;96m\t VIM clearing... \033[0m\n\n" && \
   sudo rm -rf \
       ~/.vim/bundle/Vundle.vim \
@@ -102,13 +105,13 @@ vim_clear:
       && \
   echo -e "\n\n\033[0;92m\t VIM clearing success! \033[0m"
 
-vim_install:
+ubuntu_vim_install:
   echo -e "\n\n\033[0;96m\t VIM installing... \033[0m\n\n" && \
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
   curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc && \
   echo -e "\n\n\033[0;92m\t VIM installing success! \033[0m"
 
-vim_setup:
+ubuntu_vim_setup:
   echo -e "\n\033[0;96m\t VIM setuping... \033[0m\n" && \
   sudo rm -rf \
       ~/.vim/bundle/Vundle.vim \
@@ -119,5 +122,5 @@ vim_setup:
   vim +PluginInstall +qall && \
   echo -e "\n\033[0;92m\t VIM setuping success! \033[0m\n"
 
-vim_full: vim_clear vim_install vim_setup
+ubuntu_vim_full: ubuntu_vim_clear ubuntu_vim_install ubuntu_vim_setup
   
