@@ -40,7 +40,7 @@ ubuntu_install_reuirements:
 	sudo apt install -y xz-utils && \
 	sudo apt install -y gnumeric && \
 	sudo apt install -y libpq-dev && \
-	sudo apt install -y net_tools && \
+	sudo apt install -y net-tools && \
 	sudo apt install -y python-dev && \
 	sudo apt install -y libbz2-dev && \
 	sudo apt install -y libffi-dev && \
