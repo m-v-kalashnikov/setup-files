@@ -1,6 +1,6 @@
 all:
   echo "Hello, World!"
-  
+
 start:
   echo -e "\033[0;96m Process started... \033[0m\n" && \
   cd $HOME
@@ -17,8 +17,8 @@ ubuntu_system_update:
   sudo apt update && \
   sudo apt -y upgrade && \
   sudo apt -y autoclean && \
-  sudo apt -y autoremove
-  echo -e "\n\033[0;92m\t Updating system success! \033[0m\n" && \
+  sudo apt -y autoremove && \
+  echo -e "\n\033[0;92m\t Updating system success! \033[0m\n"
   
 ubuntu_install_reuirements:
   echo -e "\n\033[0;96m\t Installing required packages... \033[0m\n" && \
@@ -77,7 +77,7 @@ ubuntu_zsh_install:
 ubuntu_zsh_setup:
   echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
   chsh -s $(which zsh) && \
-  echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc
+  echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
   echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
   
 ubuntu_zsh_full: ubuntu_zsh_clear ubuntu_zsh_install ubuntu_zsh_setup
@@ -128,7 +128,7 @@ termux_system_update:
   pkg update && \
   pkg upgrade && \
   pkg autoclean && \
-  echo -e "\n\033[0;92m\t Updating system success! \033[0m\n" && \
+  echo -e "\n\033[0;92m\t Updating system success! \033[0m\n"
   
 termux_install_reuirements:
   echo -e "\n\033[0;96m\t Installing required packages... \033[0m\n" && \
@@ -168,7 +168,7 @@ termux_zsh_install:
 termux_zsh_setup:
   echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
   chsh -s $(which zsh) && \
-  echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc
+  echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
   echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
   
 termux_zsh_full: termux_zsh_clear termux_zsh_install termux_zsh_setup
