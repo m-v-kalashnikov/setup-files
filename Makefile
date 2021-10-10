@@ -80,7 +80,7 @@ ubuntu_zsh_setup:
 	echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
 	cd $$HOME && \
 	chsh -s $$(which zsh) && \
-	echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
+	echo "\nif [[ -f ~/.custom/configrc ]]; then\n\tsource ~/.custom/configrc\nfi" >> ~/.zshrc && \
 	echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
 
 ubuntu_zsh_full: ubuntu_zsh_clear ubuntu_zsh_install ubuntu_zsh_setup
@@ -180,7 +180,7 @@ termux_zsh_setup:
 	echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
 	cd $$HOME && \
 	chsh -s $$(which zsh) && \
-	echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
+	echo "\nif [[ -f ~/.custom/configrc ]]; then\n\tsource ~/.custom/configrc\nfi" >> ~/.zshrc && \
 	echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
 
 termux_zsh_full: termux_zsh_clear termux_zsh_install termux_zsh_setup
