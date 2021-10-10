@@ -1,9 +1,9 @@
-# setup-files
+# Fast setup of system
 FIles and configs for fast Ubuntu/Termux setup
 
 ---
 
-# Prerequirements
+## Prerequirements
 
 To run Makefile first of all you need to install required libs.
 
