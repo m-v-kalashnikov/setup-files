@@ -2,7 +2,7 @@ all:
 	echo "Hello, World!"
 
 start:
-	echo -e "\033[0;96m Process started... \033[0m\n" && \
+	echo -e "\033[0;96m Process started... \033[0m\n"
 
 finish:
 	echo -e "\n\033[0;92m Process success! \033[0m"
