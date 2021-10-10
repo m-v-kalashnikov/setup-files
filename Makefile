@@ -3,7 +3,6 @@ all:
 
 start:
 	echo -e "\033[0;96m Process started... \033[0m\n" && \
-	cd $$HOME
 
 finish:
 	echo -e "\n\033[0;92m Process success! \033[0m"
@@ -66,16 +65,19 @@ ubuntu_install_reuirements:
 
 ubuntu_zsh_clear:
 	echo -e "\n\n\033[0;96m\t ZSH clearing... \033[0m\n\n" && \
+	cd $$HOME && \
 	sudo rm -rf $$(ls -a | grep zsh) && \
 	echo -e "\n\n\033[0;92m\t ZSH clearing success! \033[0m"
 
 ubuntu_zsh_install:
 	echo -e "\n\n\033[0;96m\t ZSH installing... \033[0m\n\n" && \
+	cd $$HOME && \
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
 	echo -e "\n\n\033[0;92m\t ZSH installing success! \033[0m"
 
 ubuntu_zsh_setup:
 	echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
+	cd $$HOME && \
 	chsh -s $$(which zsh) && \
 	echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
 	echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
@@ -84,16 +86,19 @@ ubuntu_zsh_full: ubuntu_zsh_clear ubuntu_zsh_install ubuntu_zsh_setup
 
 ubuntu_tmux_clear:
 	echo -e "\n\n\033[0;96m\t TMUX clearing... \033[0m\n\n" && \
+	cd $$HOME && \
 	sudo rm -rf $$(ls -a | grep tmux) && \
 	echo -e "\n\n\033[0;92m\t TMUX clearing success! \033[0m"
 
 ubuntu_tmux_install:
 	echo -e "\n\n\033[0;96m\t TMUX installing... \033[0m\n\n" && \
+	cd $$HOME && \
 	git clone https://github.com/gpakosz/.tmux.git && \
 	echo -e "\n\n\033[0;92m\t TMUX installing success! \033[0m"
 
 ubuntu_tmux_setup:
 	echo -e "\n\033[0;96m\t TMUX setuping... \033[0m\n" && \
+	cd $$HOME && \
 	sudo ln -s -f .tmux/.tmux.conf && \
 	sudo cp .tmux/.tmux.conf.local . && \
 	echo -e "\n\033[0;92m\t TMUX setuping success! \033[0m\n"
@@ -102,17 +107,20 @@ ubuntu_tmux_full: ubuntu_tmux_clear ubuntu_tmux_install ubuntu_tmux_setup
 
 ubuntu_vim_clear:
 	echo -e "\n\n\033[0;96m\t VIM clearing... \033[0m\n\n" && \
+	cd $$HOME && \
 	sudo rm -rf $$(ls -a | grep vim) && \
 	echo -e "\n\n\033[0;92m\t VIM clearing success! \033[0m"
 
 ubuntu_vim_install:
 	echo -e "\n\n\033[0;96m\t VIM installing... \033[0m\n\n" && \
+	cd $$HOME && \
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
 	curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc && \
 	echo -e "\n\n\033[0;92m\t VIM installing success! \033[0m"
 
 ubuntu_vim_setup:
 	echo -e "\n\033[0;96m\t VIM setuping... \033[0m\n" && \
+	cd $$HOME && \
 	vim +PluginInstall +qall && \
 	echo -e "\n\033[0;92m\t VIM setuping success! \033[0m\n"
 
@@ -157,16 +165,19 @@ termux_install_reuirements:
 
 termux_zsh_clear:
 	echo -e "\n\n\033[0;96m\t ZSH clearing... \033[0m\n\n" && \
+	cd $$HOME && \
 	rm -rf $$(ls -a | grep zsh) && \
 	echo -e "\n\n\033[0;92m\t ZSH clearing success! \033[0m"
 
 termux_zsh_install:
 	echo -e "\n\n\033[0;96m\t ZSH installing... \033[0m\n\n" && \
+	cd $$HOME && \
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
 	echo -e "\n\n\033[0;92m\t ZSH installing success! \033[0m"
 
 termux_zsh_setup:
 	echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
+	cd $$HOME && \
 	chsh -s $$(which zsh) && \
 	echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
 	echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
@@ -175,16 +186,19 @@ termux_zsh_full: termux_zsh_clear termux_zsh_install termux_zsh_setup
 
 termux_tmux_clear:
 	echo -e "\n\n\033[0;96m\t TMUX clearing... \033[0m\n\n" && \
+	cd $$HOME && \
 	rm -rf $$(ls -a | grep tmux) && \
 	echo -e "\n\n\033[0;92m\t TMUX clearing success! \033[0m"
 
 termux_tmux_install:
 	echo -e "\n\n\033[0;96m\t TMUX installing... \033[0m\n\n" && \
+	cd $$HOME && \
 	git clone https://github.com/gpakosz/.tmux.git && \
 	echo -e "\n\n\033[0;92m\t TMUX installing success! \033[0m"
 
 termux_tmux_setup:
 	echo -e "\n\033[0;96m\t TMUX setuping... \033[0m\n" && \
+	cd $$HOME && \
 	ln -s -f .tmux/.tmux.conf && \
 	cp .tmux/.tmux.conf.local . && \
 	echo -e "\n\033[0;92m\t TMUX setuping success! \033[0m\n"
@@ -193,17 +207,20 @@ termux_tmux_full: termux_tmux_clear termux_tmux_install termux_tmux_setup
 
 termux_vim_clear:
 	echo -e "\n\n\033[0;96m\t VIM clearing... \033[0m\n\n" && \
+	cd $$HOME && \
 	rm -rf $$(ls -a | grep vim) && \
 	echo -e "\n\n\033[0;92m\t VIM clearing success! \033[0m"
 
 termux_vim_install:
 	echo -e "\n\n\033[0;96m\t VIM installing... \033[0m\n\n" && \
+	cd $$HOME && \
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
 	curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc && \
 	echo -e "\n\n\033[0;92m\t VIM installing success! \033[0m"
 
 termux_vim_setup:
 	echo -e "\n\033[0;96m\t VIM setuping... \033[0m\n" && \
+	cd $$HOME && \
 	vim +PluginInstall +qall && \
 	echo -e "\n\033[0;92m\t VIM setuping success! \033[0m\n"
 
