@@ -66,7 +66,7 @@ ubuntu_install_reuirements:
 
 ubuntu_zsh_clear:
 	echo -e "\n\n\033[0;96m\t ZSH clearing... \033[0m\n\n" && \
-	sudo rm -rf $(ls -a | grep zsh) && \
+	sudo rm -rf $$(ls -a | grep zsh) && \
 	echo -e "\n\n\033[0;92m\t ZSH clearing success! \033[0m"
 
 ubuntu_zsh_install:
@@ -76,7 +76,7 @@ ubuntu_zsh_install:
 
 ubuntu_zsh_setup:
 	echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
-	chsh -s $(which zsh) && \
+	chsh -s $$(which zsh) && \
 	echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
 	echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
 
@@ -84,7 +84,7 @@ ubuntu_zsh_full: ubuntu_zsh_clear ubuntu_zsh_install ubuntu_zsh_setup
 
 ubuntu_tmux_clear:
 	echo -e "\n\n\033[0;96m\t TMUX clearing... \033[0m\n\n" && \
-	sudo rm -rf $(ls -a | grep tmux) && \
+	sudo rm -rf $$(ls -a | grep tmux) && \
 	echo -e "\n\n\033[0;92m\t TMUX clearing success! \033[0m"
 
 ubuntu_tmux_install:
@@ -102,7 +102,7 @@ ubuntu_tmux_full: ubuntu_tmux_clear ubuntu_tmux_install ubuntu_tmux_setup
 
 ubuntu_vim_clear:
 	echo -e "\n\n\033[0;96m\t VIM clearing... \033[0m\n\n" && \
-	sudo rm -rf $(ls -a | grep vim) && \
+	sudo rm -rf $$(ls -a | grep vim) && \
 	echo -e "\n\n\033[0;92m\t VIM clearing success! \033[0m"
 
 ubuntu_vim_install:
@@ -157,7 +157,7 @@ termux_install_reuirements:
 
 termux_zsh_clear:
 	echo -e "\n\n\033[0;96m\t ZSH clearing... \033[0m\n\n" && \
-	rm -rf $(ls -a | grep zsh) && \
+	rm -rf $$(ls -a | grep zsh) && \
 	echo -e "\n\n\033[0;92m\t ZSH clearing success! \033[0m"
 
 termux_zsh_install:
@@ -167,7 +167,7 @@ termux_zsh_install:
 
 termux_zsh_setup:
 	echo -e "\n\033[0;96m\t ZSH setuping... \033[0m\n" && \
-	chsh -s $(which zsh) && \
+	chsh -s $$(which zsh) && \
 	echo "if [ -f ~/.custom/configrc ]: then\n source ~/.custom/configrc\nfi" >> ~/.zshrc && \
 	echo -e "\n\033[0;92m\t ZSH setuping success! \033[0m\n"
 
@@ -175,7 +175,7 @@ termux_zsh_full: termux_zsh_clear termux_zsh_install termux_zsh_setup
 
 termux_tmux_clear:
 	echo -e "\n\n\033[0;96m\t TMUX clearing... \033[0m\n\n" && \
-	rm -rf $(ls -a | grep tmux) && \
+	rm -rf $$(ls -a | grep tmux) && \
 	echo -e "\n\n\033[0;92m\t TMUX clearing success! \033[0m"
 
 termux_tmux_install:
@@ -193,7 +193,7 @@ termux_tmux_full: termux_tmux_clear termux_tmux_install termux_tmux_setup
 
 termux_vim_clear:
 	echo -e "\n\n\033[0;96m\t VIM clearing... \033[0m\n\n" && \
-	rm -rf $(ls -a | grep vim) && \
+	rm -rf $$(ls -a | grep vim) && \
 	echo -e "\n\n\033[0;92m\t VIM clearing success! \033[0m"
 
 termux_vim_install:
