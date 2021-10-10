@@ -1,14 +1,14 @@
 all:
   echo "Hello, World!"
-
-ubuntu_all: start ubuntu_system_update ubuntu_install_reuirements ubuntu_zsh_full ubuntu_tmux_full ubuntu_vim_full finish
   
 start:
   echo -e "\033[0;96m Process started... \033[0m\n"
 
 finish:
   echo -e "\n\033[0;92m Process success! \033[0m"  
-  
+
+ubuntu_all: start ubuntu_system_update ubuntu_install_reuirements ubuntu_zsh_full ubuntu_tmux_full ubuntu_vim_full finish
+
 ubuntu_system_update:
   echo -e "\n\033[0;96m\t Updating system... \033[0m\n" && \
   sudo apt update && \
