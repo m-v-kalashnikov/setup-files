@@ -1,26 +1,31 @@
 # Fast setup of system
-FIles and configs for fast Ubuntu/Termux setup
+FIles and configs for fast apt-included system setup
 
 ---
 
-## Prerequirements
+### This script should be run via:
 
-To run Makefile first of all you need to install required libs.
-
-`Ubuntu`
+`curl`
 
 ```shell
-sudo apt install -y gcc git make build-essential
-git clone https://github.com/m-v-kalashnikov/setup-files.git
-cd setup-files && make ubuntu_all
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/install.sh)"
 ```
 
-`Termux`
+`wget`
 
 ```shell
-pkg install -y libllvm git make build-essential
-git clone https://github.com/m-v-kalashnikov/setup-files.git
-cd setup-files && make termux_all
+sh -c "$(wget -qO- https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/install.sh)"
+```
+
+`fetch`
+```shell
+sh -c "$(fetch -o - https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/install.sh)"
+```
+
+### As an alternative, you can first download the install script and run it afterwards:
+```shell
+wget https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/install.sh
+sh install.sh
 ```
 
 ---
