@@ -41,7 +41,7 @@ main() {
 		exit 0
 	fi
 	
-	echo "This script wasn\'t designed for your system!"
+	echo "This script wasn't designed for your system!"
 	exit 1
 }
 
