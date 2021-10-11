@@ -31,6 +31,7 @@ ubuntu_install_reuirements:
 	sudo apt install -y llvm && \
 	sudo apt install -y make && \
 	sudo apt install -y mosh && \
+	sudo apt install -y nmap && \
 	sudo apt install -y wget && \
 	sudo apt install -y tree && \
 	sudo apt install -y tmux && \
