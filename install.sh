@@ -35,7 +35,7 @@ main() {
   	esac
 	
 	if [ "$apt" == true ]; then
-	    pkg install -y libllvm git make build-essential
+	    apt install -y libllvm git make build-essential
 	    git clone https://github.com/m-v-kalashnikov/setup-files.git
 	    cd setup-files && make termux_all
 		exit 0
