@@ -51,3 +51,5 @@ main() {
 	echo "This script wasn\'t designed for your system!"
 	exit 1
 }
+
+main
