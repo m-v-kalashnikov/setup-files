@@ -37,6 +37,7 @@ ubuntu_install_reuirements:
 	sudo apt install -y tmux && \
 	sudo apt install -y nginx && \
 	sudo apt install -y unzip && \
+	sudo apt install -y xclip && \
 	sudo apt install -y tk-dev && \
 	sudo apt install -y xz-utils && \
 	sudo apt install -y gnumeric && \
