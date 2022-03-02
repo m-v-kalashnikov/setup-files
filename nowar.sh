@@ -176,9 +176,10 @@ setup_custom_config() {
 
   sudo rm -rf "$HOME/.custom"
   mkdir -p "$HOME/.custom"
-  touch "$HOME/.custom/aliases"
-  echo '\n\n# make grep output colorful\nalias grep="grep --color=auto"\n\n# update shortcut\nalias update="sudo apt update && sudo apt -y upgrade && sudo apt -y autoclean && sudo apt -y autoremove"' >> $HOME/.custom/aliases
-  echo "\n\nif [[ -f $HOME/.custom/aliases ]]; then\n\tsource $HOME/.custom/aliases\nfi" >> $HOME/.custom/configrc
+  echo '#!/bin/sh\n\n' >> $HOME/.custom/aliases.sh
+  echo '#!/bin/sh\n\n' >> $HOME/.custom/configrc.sh
+  echo '\n\n# make grep output colorful\nalias grep="grep --color=auto"\n\n# update shortcut\nalias update="sudo apt update && sudo apt -y upgrade && sudo apt -y autoclean && sudo apt -y autoremove"' >> $HOME/.custom/aliases.sh
+  echo "\n\nif [[ -f $HOME/.custom/aliases.sh ]]; then\n\tsource $HOME/.custom/aliases.sh\nfi" >> $HOME/.custom/configrc.sh
 
   printf "%s Custom config setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -192,7 +193,7 @@ setup_zsh() {
   sudo rm -rf "$HOME/.oh-my-zs*"
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   chsh -s "$(which zsh)"
-  echo "\nif [[ -f $HOME/.custom/configrc ]]; then\n\tsource $HOME/.custom/configrc\nfi" >> $HOME/.zshrc
+  echo "\nif [[ -f $HOME/.custom/configrc.sh ]]; then\n\tsource $HOME/.custom/configrc.sh\nfi" >> $HOME/.zshrc
 
   printf "%s ZSH setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -231,9 +232,9 @@ setup_go() {
   sudo rm -rf /usr/local/go
   curl -LO "https://dl.google.com/go/$GO_ARCHIVE"
   sudo tar -C /usr/local -xzf "$GO_ARCHIVE"
-  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configrc
+  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configrc.sh
   sudo rm -rf "$GO_ARCHIVE"
-  . "$HOME/.custom/configrc"
+  . "$HOME/.custom/configrc.sh"
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -248,7 +249,7 @@ setup_bombardier() {
   CONNECTIONS='--connections=300'
   RATE_LIMIT='--rate=1000'
   HEADERS='--header="user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109"'
-  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT" >> $HOME/.custom/aliases
+  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT" >> $HOME/.custom/aliases.sh
 
   printf "%s Bombardier setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
