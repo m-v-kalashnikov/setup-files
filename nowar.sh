@@ -5,7 +5,7 @@ set -e
 # Default settings
 REPO=${REPO:-m-v-kalashnikov/setup-files}
 REMOTE=${REMOTE:-https://github.com/${REPO}.git}
-BRANCH=${BRANCH:-master}
+BRANCH=${BRANCH:-main}
 
 
 command_exists() {
