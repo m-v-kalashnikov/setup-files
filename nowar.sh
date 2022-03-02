@@ -155,7 +155,8 @@ updating_system() {
 }
 
 install_apt() {
-  sudo apt install -y "$@" > /dev/null 2>&1
+#  sudo apt install -y "$@" > /dev/null 2>&1
+  sudo apt install -y "$@"
 }
 
 setup_custom_config() {
