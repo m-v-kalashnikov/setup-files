@@ -228,13 +228,14 @@ setup_go() {
 
   cd "$HOME"
   GO_ARCHIVE="go1.17.7.linux-amd64.tar.gz"
+  GO_SLINK="https://dl.google.com/go/$GO_ARCHIVE"
   sudo rm -rf /usr/local/go
-  curl -LO "https://dl.google.com/go/$GO_ARCHIVE"
+  curl -LO $GO_SLINK
   sudo tar -C /usr/local -xzf "$GO_ARCHIVE"
-  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configs.sh
+  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"\n' >> $HOME/.custom/configs.sh
+  . "$HOME/.custom/configs.sh"
   sudo rm -rf "$GO_ARCHIVE"
-  sh "$HOME/.custom/configs.sh"
-  go --version
+  go version
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -249,7 +250,7 @@ setup_bombardier() {
   CONNECTIONS='--connections=300'
   RATE_LIMIT='--rate=1000'
   HEADERS='--header="user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109"'
-  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT" >> $HOME/.custom/aliases.sh
+  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> $HOME/.custom/aliases.sh
 
   printf "%s Bombardier setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -273,7 +274,7 @@ main() {
   setup_go
   setup_bombardier
 
-  sh "$HOME"/.custom/configs.sh
+  . "$HOME"/.zshrc
 
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
 }
