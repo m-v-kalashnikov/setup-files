@@ -177,8 +177,8 @@ setup_custom_config() {
   sudo rm -rf "$HOME/.custom"
   mkdir -p "$HOME/.custom"
 
-  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/aliases.sh" --output "$HOME/.custom/aliases.sh"
-  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/configs.sh" --output "$HOME/.custom/configs.sh"
+  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/aliases.sh" --output "$HOME/.custom/aliases.sh" > /dev/null 2>&1
+  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/configs.sh" --output "$HOME/.custom/configs.sh" > /dev/null 2>&1
 
   printf "%s Custom config setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -203,7 +203,7 @@ setup_tmux() {
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
   sudo rm -rf "$HOME/.tmu*"
-  git clone https://github.com/gpakosz/.tmux.git
+  git clone https://github.com/gpakosz/.tmux.git > /dev/null 2>&1
   sudo ln -s -f .tmux/.tmux.conf
   sudo cp .tmux/.tmux.conf.local "$HOME"
 
@@ -216,8 +216,8 @@ setup_vim() {
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep vim)"
   sudo rm -rf "$HOME/.vi*"
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+  curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc > /dev/null 2>&1
   vim +PluginInstall +qall
 
   printf "%s VIM setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
@@ -230,8 +230,8 @@ setup_go() {
   GO_ARCHIVE="go1.17.7.linux-amd64.tar.gz"
   GO_SLINK="https://dl.google.com/go/$GO_ARCHIVE"
   sudo rm -rf /usr/local/go
-  curl -LO $GO_SLINK
-  sudo tar -C /usr/local -xzf "$GO_ARCHIVE"
+  curl -LO $GO_SLINK > /dev/null 2>&1
+  sudo tar -C /usr/local -xzf "$GO_ARCHIVE" > /dev/null 2>&1
   echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"\n' >> $HOME/.custom/configs.sh
   . "$HOME/.custom/configs.sh"
   sudo rm -rf "$GO_ARCHIVE"
@@ -244,7 +244,7 @@ setup_bombardier() {
   printf "%s Bombardier setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
   cd "$HOME"
-  go install github.com/codesenberg/bombardier@latest
+  go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
 
   DURATION='--duration=10h'
   CONNECTIONS='--connections=300'
