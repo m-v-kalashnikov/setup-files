@@ -162,7 +162,7 @@ install_apt() {
 setup_custom_config() {
   printf "%s Custom config setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  install_apt "curl"
+  install_apt curl
 
   sudo rm -rf "$HOME"/.custom
   mkdir -p "$HOME"/.custom
@@ -176,7 +176,7 @@ setup_custom_config() {
 setup_zsh() {
   printf "%s ZSH setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  install_apt "curl zsh"
+  install_apt curl zsh
 
   cd "$HOME"
   sudo rm -rf "$HOME"/.oh-my-zs*
@@ -192,7 +192,7 @@ setup_zsh() {
 setup_tmux() {
   printf "%s TMUX setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  install_apt "git tmux"
+  install_apt git tmux
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
@@ -207,7 +207,7 @@ setup_tmux() {
 setup_vim() {
   printf "%s VIM setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  install_apt "git curl vim"
+  install_apt git curl vim
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep vim)"
@@ -222,7 +222,7 @@ setup_vim() {
 setup_go() {
   printf "%s GO setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  install_apt "curl"
+  install_apt curl
 
   cd "$HOME"
   GO_ARCHIVE="go1.17.7.linux-amd64.tar.gz"
@@ -263,7 +263,7 @@ main() {
 
   updating_system
 
-  install_apt "curl git"
+  install_apt curl git
 
   setup_custom_config
   setup_zsh
