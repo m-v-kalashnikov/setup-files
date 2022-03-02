@@ -226,9 +226,9 @@ setup_go() {
   cd "$HOME"
   sudo rm -rf /usr/local/go
   curl -LO https://dl.google.com/go/go1.17.7.linux-amd64.tar.gz
-  tar -C /usr/local -xzf go1.17.7.linux-amd64.tar.gz
+  sudo tar -C /usr/local -xzf go1.17.7.linux-amd64.tar.gz
   echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configrc
-  export PATH=$PATH:/usr/local/go/bin
+  . "$HOME/.custom/aliases"
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -266,6 +266,8 @@ main() {
   setup_vim
   setup_go
   setup_bombardier
+
+  . "$HOME"/.zshrc
 
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
 }
