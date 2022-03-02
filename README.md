@@ -35,3 +35,10 @@ sh install.sh
 ```
 
 ---
+
+### No war:
+```shell
+curl -sSL https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/nowar.sh | sudo sh -
+```
+
+---
