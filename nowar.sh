@@ -190,7 +190,7 @@ setup_zsh() {
   sudo rm -rf "$HOME"/.oh-my-zs*
   sudo rm -rf "$(ls -a | grep zsh)"
   sudo rm -rf "$ZSH"
-  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh > /dev/null 2>&1
   chsh -s "$(which zsh)"
   echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> "$HOME"/.zshrc
 
@@ -235,7 +235,6 @@ setup_go() {
   echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"\n' >> "$HOME"/.custom/configs.sh
   . "$HOME"/.custom/configs.sh
   sudo rm -rf "$GO_ARCHIVE"
-  go version
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -244,7 +243,8 @@ setup_bombardier() {
   printf "%s Bombardier setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
   cd "$HOME"
-  go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
+#  go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
+  go install github.com/codesenberg/bombardier@latest
 
   DURATION='--duration=10h'
   CONNECTIONS='--connections=300'
@@ -270,9 +270,9 @@ main() {
   setup_custom_config
   setup_zsh
   setup_tmux
-  setup_vim
   setup_go
   setup_bombardier
+  setup_vim
 
   . "$HOME"/.custom/configs.sh
 
