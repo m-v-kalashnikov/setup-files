@@ -201,6 +201,7 @@ setup_tmux() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
+  sudo rm -rf "$HOME/.tmux*"
   git clone https://github.com/gpakosz/.tmux.git
   sudo ln -s -f .tmux/.tmux.conf
   sudo cp .tmux/.tmux.conf.local "$HOME"
@@ -213,6 +214,7 @@ setup_vim() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep vim)"
+  sudo rm -rf "$HOME/.vim*"
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc
   vim +PluginInstall +qall
