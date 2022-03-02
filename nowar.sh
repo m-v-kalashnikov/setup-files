@@ -233,7 +233,7 @@ setup_go() {
   sudo tar -C /usr/local -xzf "$GO_ARCHIVE"
   echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configrc
   sudo rm -rf "$GO_ARCHIVE"
-  . "$HOME/.custom/aliases"
+  . "$HOME/.custom/configrc"
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
