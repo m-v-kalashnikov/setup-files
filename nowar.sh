@@ -174,11 +174,11 @@ install_requirements() {
 setup_custom_config() {
   printf "%s Custom config setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  sudo rm -rf "$HOME/.custom"
-  mkdir -p "$HOME/.custom"
+  sudo rm -rf "$HOME"/.custom
+  mkdir -p "$HOME"/.custom
 
-  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/aliases.sh" --output "$HOME/.custom/aliases.sh" > /dev/null 2>&1
-  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/configs.sh" --output "$HOME/.custom/configs.sh" > /dev/null 2>&1
+  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/aliases.sh" --output "$HOME"/.custom/aliases.sh > /dev/null 2>&1
+  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/configs.sh" --output "$HOME"/.custom/configs.sh > /dev/null 2>&1
 
   printf "%s Custom config setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -187,12 +187,12 @@ setup_zsh() {
   printf "%s ZSH setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
   cd "$HOME"
+  sudo rm -rf "$HOME"/.oh-my-zs*
   sudo rm -rf "$(ls -a | grep zsh)"
   sudo rm -rf "$ZSH"
-  sudo rm -rf "$HOME/.oh-my-zs*"
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   chsh -s "$(which zsh)"
-  echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> $HOME/.zshrc
+  echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> "$HOME"/.zshrc
 
   printf "%s ZSH setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -202,7 +202,7 @@ setup_tmux() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
-  sudo rm -rf "$HOME/.tmu*"
+  sudo rm -rf "$HOME"/.tmu*
   git clone https://github.com/gpakosz/.tmux.git > /dev/null 2>&1
   sudo ln -s -f .tmux/.tmux.conf
   sudo cp .tmux/.tmux.conf.local "$HOME"
@@ -215,7 +215,7 @@ setup_vim() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep vim)"
-  sudo rm -rf "$HOME/.vi*"
+  sudo rm -rf "$HOME"/.vi*
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
   curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc > /dev/null 2>&1
   vim +PluginInstall +qall
@@ -232,8 +232,8 @@ setup_go() {
   sudo rm -rf /usr/local/go
   curl -LO $GO_SLINK > /dev/null 2>&1
   sudo tar -C /usr/local -xzf "$GO_ARCHIVE" > /dev/null 2>&1
-  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"\n' >> $HOME/.custom/configs.sh
-  . "$HOME/.custom/configs.sh"
+  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"\n' >> "$HOME"/.custom/configs.sh
+  . "$HOME"/.custom/configs.sh
   sudo rm -rf "$GO_ARCHIVE"
   go version
 
@@ -250,7 +250,7 @@ setup_bombardier() {
   CONNECTIONS='--connections=300'
   RATE_LIMIT='--rate=1000'
   HEADERS='--header="user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109"'
-  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> $HOME/.custom/aliases.sh
+  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> "$HOME"/.custom/aliases.sh
 
   printf "%s Bombardier setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -274,7 +274,7 @@ main() {
   setup_go
   setup_bombardier
 
-  . "$HOME"/.zshrc
+  . "$HOME"/.custom/configs.sh
 
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
 }
