@@ -8,10 +8,6 @@ REMOTE=${REMOTE:-https://github.com/${REPO}.git}
 BRANCH=${BRANCH:-main}
 
 
-command_exists() {
-  command -v "$@" >/dev/null 2>&1
-}
-
 # The [ -t 1 ] check only works when the function is not called from
 # a subshell (like in `$(...)` or `(...)`, so this hack redefines the
 # function at the top level to always return false when stdout is not
@@ -158,21 +154,14 @@ updating_system() {
   printf "%s Updating of system %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
 
-install_requirements() {
-  printf "%s Installing of requirements %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
-
-  COMMON="gcc git tmux zsh vim curl wget"
-
-  for requirement in $COMMON;
-  do
-    sudo apt install -y "$requirement" > /dev/null 2>&1
-  done
-
-  printf "%s Installing of requirements %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
+install_apt() {
+  sudo apt install -y "$@" > /dev/null 2>&1
 }
 
 setup_custom_config() {
   printf "%s Custom config setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
+
+  install_apt "curl"
 
   sudo rm -rf "$HOME"/.custom
   mkdir -p "$HOME"/.custom
@@ -186,12 +175,14 @@ setup_custom_config() {
 setup_zsh() {
   printf "%s ZSH setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
+  install_apt "curl zsh"
+
   cd "$HOME"
   sudo rm -rf "$HOME"/.oh-my-zs*
   sudo rm -rf "$(ls -a | grep zsh)"
   sudo rm -rf "$ZSH"
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh > /dev/null 2>&1
-  chsh -s "$(which zsh)"
+  sudo chsh -s "$(which zsh)"
   echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> "$HOME"/.zshrc
 
   printf "%s ZSH setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
@@ -199,6 +190,8 @@ setup_zsh() {
 
 setup_tmux() {
   printf "%s TMUX setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
+
+  install_apt "git tmux"
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
@@ -213,18 +206,22 @@ setup_tmux() {
 setup_vim() {
   printf "%s VIM setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
+  install_apt "git curl vim"
+
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep vim)"
   sudo rm -rf "$HOME"/.vi*
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
   curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc > /dev/null 2>&1
-  vim +PluginInstall +qall
+  vim +PluginInstall! +PluginClean! +qall
 
   printf "%s VIM setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
 
 setup_go() {
   printf "%s GO setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
+
+  install_apt "curl"
 
   cd "$HOME"
   GO_ARCHIVE="go1.17.7.linux-amd64.tar.gz"
@@ -265,7 +262,7 @@ main() {
 
   updating_system
 
-  install_requirements
+  install_apt "curl git"
 
   setup_custom_config
   setup_zsh
@@ -277,6 +274,7 @@ main() {
   . "$HOME"/.custom/configs.sh
 
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
+  sudo reboot
 }
 
 main
