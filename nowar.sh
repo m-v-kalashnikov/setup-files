@@ -187,6 +187,7 @@ setup_zsh() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep zsh)"
+  sudo rm -rf $ZSH
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   chsh -s "$(which zsh)"
   echo "\nif [[ -f $HOME/.custom/configrc ]]; then\n\tsource $HOME/.custom/configrc\nfi" >> $HOME/.zshrc
