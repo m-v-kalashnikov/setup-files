@@ -227,10 +227,12 @@ setup_go() {
   printf "%s GO setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
   cd "$HOME"
+  GO_ARCHIVE="go1.17.7.linux-amd64.tar.gz"
   sudo rm -rf /usr/local/go
-  curl -LO https://dl.google.com/go/go1.17.7.linux-amd64.tar.gz
-  sudo tar -C /usr/local -xzf go1.17.7.linux-amd64.tar.gz
+  curl -LO "https://dl.google.com/go/$GO_ARCHIVE"
+  sudo tar -C /usr/local -xzf "$GO_ARCHIVE"
   echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configrc
+  sudo rm -rf "$GO_ARCHIVE"
   . "$HOME/.custom/aliases"
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
