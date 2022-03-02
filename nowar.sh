@@ -176,10 +176,9 @@ setup_custom_config() {
 
   sudo rm -rf "$HOME/.custom"
   mkdir -p "$HOME/.custom"
-  echo '#!/bin/sh\n\n' >> $HOME/.custom/aliases.sh
-  echo '#!/bin/sh\n\n' >> $HOME/.custom/configrc.sh
-  echo '\n\n# make grep output colorful\nalias grep="grep --color=auto"\n\n# update shortcut\nalias update="sudo apt update && sudo apt -y upgrade && sudo apt -y autoclean && sudo apt -y autoremove"' >> $HOME/.custom/aliases.sh
-  echo "\n\nif [[ -f $HOME/.custom/aliases.sh ]]; then\n\tsource $HOME/.custom/aliases.sh\nfi" >> $HOME/.custom/configrc.sh
+
+  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/aliases.sh" --output "$HOME/.custom/aliases.sh"
+  curl "https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/configs.sh" --output "$HOME/.custom/configs.sh"
 
   printf "%s Custom config setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -193,7 +192,7 @@ setup_zsh() {
   sudo rm -rf "$HOME/.oh-my-zs*"
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   chsh -s "$(which zsh)"
-  echo "\nif [[ -f $HOME/.custom/configrc.sh ]]; then\n\tsource $HOME/.custom/configrc.sh\nfi" >> $HOME/.zshrc
+  echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> $HOME/.zshrc
 
   printf "%s ZSH setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -232,9 +231,9 @@ setup_go() {
   sudo rm -rf /usr/local/go
   curl -LO "https://dl.google.com/go/$GO_ARCHIVE"
   sudo tar -C /usr/local -xzf "$GO_ARCHIVE"
-  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configrc.sh
+  echo '\n\n# go configurations\nexport GOPATH="$HOME/go"\nexport PATH="$PATH:/$GOPATH/bin"\nexport PATH="$PATH:/usr/local/go/bin"' >> $HOME/.custom/configs.sh
   sudo rm -rf "$GO_ARCHIVE"
-  . "$HOME/.custom/configrc.sh"
+  sh "$HOME/.custom/configs.sh"
 
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -273,7 +272,7 @@ main() {
   setup_go
   setup_bombardier
 
-  . "$HOME"/.zshrc
+  sh "$HOME"/.custom/configs.sh
 
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
 }
