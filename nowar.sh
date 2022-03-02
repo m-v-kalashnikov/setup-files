@@ -174,6 +174,7 @@ install_requirements() {
 setup_custom_config() {
   printf "%s Custom config setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
+  sudo rm -rf "$HOME/.custom"
   mkdir -p "$HOME/.custom"
   touch "$HOME/.custom/aliases"
   echo '\n\n# make grep output colorful\nalias grep="grep --color=auto"\n\n# update shortcut\nalias update="sudo apt update && sudo apt -y upgrade && sudo apt -y autoclean && sudo apt -y autoremove"' >> $HOME/.custom/aliases
@@ -188,7 +189,7 @@ setup_zsh() {
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep zsh)"
   sudo rm -rf "$ZSH"
-  sudo rm -rf "$HOME/.oh-my-zsh"
+  sudo rm -rf "$HOME/.oh-my-zs*"
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   chsh -s "$(which zsh)"
   echo "\nif [[ -f $HOME/.custom/configrc ]]; then\n\tsource $HOME/.custom/configrc\nfi" >> $HOME/.zshrc
@@ -201,7 +202,7 @@ setup_tmux() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
-  sudo rm -rf "$HOME/.tmux*"
+  sudo rm -rf "$HOME/.tmu*"
   git clone https://github.com/gpakosz/.tmux.git
   sudo ln -s -f .tmux/.tmux.conf
   sudo cp .tmux/.tmux.conf.local "$HOME"
@@ -214,7 +215,7 @@ setup_vim() {
 
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep vim)"
-  sudo rm -rf "$HOME/.vim*"
+  sudo rm -rf "$HOME/.vi*"
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   curl --silent --output .vimrc https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/.vimrc
   vim +PluginInstall +qall
