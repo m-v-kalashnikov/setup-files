@@ -155,8 +155,7 @@ updating_system() {
 }
 
 install_apt() {
-#  sudo apt install -y "$@" > /dev/null 2>&1
-  sudo apt install -y "$@"
+  sudo apt install -y "$@" > /dev/null 2>&1
 }
 
 setup_custom_config() {
@@ -269,7 +268,7 @@ main() {
   setup_zsh
   setup_tmux
   setup_go
-#  setup_bombardier
+  setup_bombardier
   setup_vim
 
   . "$HOME"/.custom/configs.sh
