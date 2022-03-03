@@ -298,8 +298,6 @@ main() {
   setup_bombardier
   setup_vim
 
-  . "$HOME"/.custom/configs.sh
-
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
   sudo reboot
 }
