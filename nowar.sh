@@ -205,6 +205,10 @@ setup_tmux() {
   printf "%s TMUX setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
 
+open_tmux() {
+  tmux new-session -ADs setup
+}
+
 setup_vim() {
   printf "%s VIM setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
@@ -241,6 +245,8 @@ setup_go() {
 setup_bombardier() {
   printf "%s Bombardier setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
+  install_apt git
+
   cd "$HOME"
   . "$HOME"/.custom/configs.sh
   go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
@@ -254,8 +260,6 @@ setup_bombardier() {
   printf "%s Bombardier setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
 
-
-
 main() {
   setup_color
   clear
@@ -267,16 +271,17 @@ main() {
   install_apt curl git tree
 
   setup_custom_config
-  setup_zsh
   setup_tmux
+  open_tmux
+  setup_zsh
   setup_go
-  setup_bombardier
   setup_vim
+  setup_bombardier
 
   . "$HOME"/.custom/configs.sh
 
   printf "%s %sCongratulations!! %s we successfully configured %s%s a lot!%s\n" "$PIPE0" "$L_GREEN" "$L_BLUE" "$BOLD" "$YELLOW" "$RESET"
-#  sudo reboot
+  sudo reboot
 }
 
 main
