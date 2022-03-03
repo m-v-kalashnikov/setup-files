@@ -42,6 +42,7 @@ install_docker() {
   sudo usermod -aG docker "$USER"
 
   updating_system
+  newgrp docker
 }
 
 run_db1000n() {
