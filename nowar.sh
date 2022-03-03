@@ -143,13 +143,17 @@ setup_color() {
   PIPE2="${PIPE1}${LVL}${PIPE}"
 }
 
-updating_system() {
-  printf "%s Updating of system %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
-
+_updating_system() {
   sudo apt update > /dev/null 2>&1
   sudo apt -y upgrade > /dev/null 2>&1
   sudo apt -y autoclean > /dev/null 2>&1
   sudo apt -y autoremove > /dev/null 2>&1
+}
+
+updating_system() {
+  printf "%s Updating of system %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
+
+  _updating_system
 
   printf "%s Updating of system %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -240,17 +244,17 @@ setup_docker() {
   printf "%s Docker setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
   sudo apt remove docker docker-engine docker.io containerd runc > /dev/null 2>&1
-  updating_system
+  _updating_system
   install_apt ca-certificates curl gnupg lsb-release
 
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-  updating_system
+  _updating_system
   install_apt docker-ce docker-ce-cli containerd.io
   sudo groupadd -f docker
   sudo usermod -aG docker "$USER"
-  updating_system
+  _updating_system
 
   printf "%s Docker setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
