@@ -42,8 +42,6 @@ install_docker() {
   sudo usermod -aG docker "$USER"
 
   updating_system
-
-  sudo docker run --name db1000n -d ghcr.io/arriven/db1000n
 }
 
 run_db1000n() {
