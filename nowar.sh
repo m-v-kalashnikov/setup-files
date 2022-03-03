@@ -250,7 +250,6 @@ setup_docker() {
   install_apt docker-ce docker-ce-cli containerd.io
   sudo groupadd docker
   sudo usermod -aG docker "$USER"
-  newgrp docker
   updating_system
 
   printf "%s Docker setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
@@ -259,7 +258,7 @@ setup_docker() {
 setup_db1000n() {
   printf "%s DB1000N setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  echo '\n\n# db1000n configurations\ndocker run ghcr.io/arriven/db1000n\n' >> "$HOME"/.custom/configs.sh
+  echo '\n\n# db1000n configurations\nsudo docker run ghcr.io/arriven/db1000n\n' >> "$HOME"/.custom/configs.sh
 
   printf "%s DB1000N setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -267,17 +266,11 @@ setup_db1000n() {
 setup_bombardier() {
   printf "%s Bombardier setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  install_apt git
-
-  cd "$HOME"
-  . "$HOME"/.custom/configs.sh
-  go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
-
   DURATION='--duration=10h'
   CONNECTIONS='--connections=300'
   RATE_LIMIT='--rate=1000'
   HEADERS='--header="user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109"'
-  echo "\n\n# bombardier alias\nalias boom='clear && docker run --rm -it alpine/bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> "$HOME"/.custom/aliases.sh
+  echo "\n\n# bombardier alias\nalias boom='clear && sudo docker run --rm -it alpine/bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> "$HOME"/.custom/aliases.sh
 
   printf "%s Bombardier setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -296,10 +289,10 @@ main() {
   setup_tmux
   setup_zsh
   setup_go
-  setup_vim
   setup_docker
   setup_db1000n
   setup_bombardier
+  setup_vim
 
   . "$HOME"/.custom/configs.sh
 
