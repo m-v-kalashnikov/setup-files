@@ -2,6 +2,9 @@
 
 set -e
 
+INSTALL=yes
+RUN=yes
+
 updating_system() {
   sudo apt update
   sudo apt -y upgrade
@@ -54,5 +57,23 @@ run_db1000n() {
   fi
 }
 
-install_docker
-run_db1000n
+main() {
+  # Parse arguments
+  while [ $# -gt 0 ]; do
+    case $1 in
+      --skip-install) INSTALL=no ;;
+      --skip-run) RUN=no ;;
+    esac
+    shift
+  done
+
+  if [ $INSTALL = yes ]; then
+    install_docker
+  fi
+
+  if [ $RUN = yes ]; then
+    run_db1000n
+  fi
+}
+
+main "$@"
