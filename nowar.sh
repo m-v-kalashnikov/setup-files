@@ -242,8 +242,8 @@ setup_bombardier() {
   printf "%s Bombardier setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
   cd "$HOME"
-#  go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
-  go install github.com/codesenberg/bombardier@latest
+  . "$HOME"/.custom/configs.sh
+  go install github.com/codesenberg/bombardier@latest > /dev/null 2>&1
 
   DURATION='--duration=10h'
   CONNECTIONS='--connections=300'
@@ -264,13 +264,13 @@ main() {
 
   updating_system
 
-  install_apt curl git
+  install_apt curl git tree
 
   setup_custom_config
   setup_zsh
   setup_tmux
   setup_go
-#  setup_bombardier
+  setup_bombardier
   setup_vim
 
   . "$HOME"/.custom/configs.sh
