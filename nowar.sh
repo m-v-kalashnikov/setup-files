@@ -184,7 +184,7 @@ setup_zsh() {
   curl "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" --output /tmp/install.sh > /dev/null 2>&1
   . /tmp/install.sh > /dev/null 2>&1
   sudo rm -rf /tmp/install.sh
-  sudo chsh -s "$(which zsh)"
+  chsh -s "$(which zsh)"
   echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> "$HOME"/.zshrc
 
   printf "%s ZSH setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
@@ -271,7 +271,7 @@ main() {
   setup_zsh
   setup_go
   setup_vim
-  setup_bombardier
+#  setup_bombardier
 
   . "$HOME"/.custom/configs.sh
 
