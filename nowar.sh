@@ -248,7 +248,7 @@ setup_docker() {
 
   updating_system
   install_apt docker-ce docker-ce-cli containerd.io
-  sudo groupadd docker
+  sudo groupadd -f docker
   sudo usermod -aG docker "$USER"
   updating_system
 
