@@ -13,10 +13,23 @@ install_apt() {
   sudo apt install -y "$@"
 }
 
+remove_apt() {
+  {
+    sudo apt remove "$@"
+  } || {
+    echo "ok!"
+  }
+}
+
+
 install_docker() {
   updating_system
 
-  sudo apt remove docker docker-engine docker.io containerd runc
+  CLEAN="docker docker-engine docker.io containerd runc"
+
+  for to_clean in $CLEAN; do
+    remove_apt "$to_clean"
+  done
 
   updating_system
   install_apt ca-certificates curl gnupg lsb-release
