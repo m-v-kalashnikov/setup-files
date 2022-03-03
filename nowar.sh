@@ -262,7 +262,7 @@ setup_docker() {
 setup_db1000n() {
   printf "%s DB1000N setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
-  echo '\n\n# db1000n configurations\nsudo docker run ghcr.io/arriven/db1000n\n' >> "$HOME"/.custom/configs.sh
+  echo '\n\n# db1000n configurations\nsudo docker run -d ghcr.io/arriven/db1000n\n' >> "$HOME"/.custom/configs.sh
 
   printf "%s DB1000N setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
