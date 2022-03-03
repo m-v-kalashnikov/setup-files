@@ -205,10 +205,6 @@ setup_tmux() {
   printf "%s TMUX setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
 
-open_tmux() {
-  tmux new-session -ADs setup
-}
-
 setup_vim() {
   printf "%s VIM setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
@@ -272,7 +268,6 @@ main() {
 
   setup_custom_config
   setup_tmux
-  open_tmux
   setup_zsh
   setup_go
   setup_vim
