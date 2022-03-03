@@ -181,7 +181,9 @@ setup_zsh() {
   sudo rm -rf "$HOME"/.oh-my-zs*
   sudo rm -rf "$(ls -a | grep zsh)"
   sudo rm -rf "$ZSH"
-  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh > /dev/null 2>&1
+  curl "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" --output /tmp/install.sh > /dev/null 2>&1
+  . /tmp/install.sh > /dev/null 2>&1
+  sudo rm -rf /tmp/install.sh
   sudo chsh -s "$(which zsh)"
   echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> "$HOME"/.zshrc
 
@@ -268,7 +270,7 @@ main() {
   setup_zsh
   setup_tmux
   setup_go
-  setup_bombardier
+#  setup_bombardier
   setup_vim
 
   . "$HOME"/.custom/configs.sh
