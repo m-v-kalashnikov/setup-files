@@ -49,10 +49,13 @@ install_docker() {
 }
 
 run_db1000n() {
-  if docker ps | grep "db1000n" > /dev/null 2>&1; then
+  if sudo docker ps | grep "db1000n" > /dev/null 2>&1; then
     echo "Running..."
   else
-    echo "Will run..."
+    echo "Starting..."
+    if sudo docker ps --all | grep "db1000n" > /dev/null 2>&1; then
+      sudo docker rm db1000n
+    fi
     sudo docker run --name db1000n -d ghcr.io/arriven/db1000n
   fi
 }
