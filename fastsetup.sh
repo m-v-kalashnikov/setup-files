@@ -3,20 +3,20 @@
 set -e
 
 updating_system() {
-  sudo apt update > /dev/null 2>&1
-  sudo apt -y upgrade > /dev/null 2>&1
-  sudo apt -y autoclean > /dev/null 2>&1
-  sudo apt -y autoremove > /dev/null 2>&1
+  sudo apt update
+  sudo apt -y upgrade
+  sudo apt -y autoclean
+  sudo apt -y autoremove
 }
 
 install_apt() {
-  sudo apt install -y "$@" > /dev/null 2>&1
+  sudo apt install -y "$@"
 }
 
 install_docker() {
   updating_system
 
-  sudo apt remove docker docker-engine docker.io containerd runc > /dev/null 2>&1
+  sudo apt remove docker docker-engine docker.io containerd runc
 
   updating_system
   install_apt ca-certificates curl gnupg lsb-release
