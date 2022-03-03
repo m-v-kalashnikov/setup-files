@@ -187,7 +187,7 @@ setup_zsh() {
   sudo rm -rf "$ZSH"
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   echo "\nif [[ -f $HOME/.custom/configs.sh ]]; then\n\tsource $HOME/.custom/configs.sh\nfi" >> "$HOME"/.zshrc
-  sudo chsh -s "$(which zsh)"
+  chsh -s "$(which zsh)"
 
   printf "%s ZSH setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
