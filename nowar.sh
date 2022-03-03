@@ -236,6 +236,34 @@ setup_go() {
   printf "%s GO setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
 
+setup_docker() {
+  printf "%s Docker setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
+
+  sudo apt remove docker docker-engine docker.io containerd runc > /dev/null 2>&1
+  updating_system
+  install_apt ca-certificates curl gnupg lsb-release
+
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  updating_system
+  install_apt docker-ce docker-ce-cli containerd.io
+  sudo groupadd docker
+  sudo usermod -aG docker "$USER"
+  newgrp docker
+  updating_system
+
+  printf "%s Docker setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
+}
+
+setup_db1000n() {
+  printf "%s DB1000N setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
+
+  echo '\n\n# db1000n configurations\ndocker run ghcr.io/arriven/db1000n\n' >> "$HOME"/.custom/configs.sh
+
+  printf "%s DB1000N setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
+}
+
 setup_bombardier() {
   printf "%s Bombardier setup %s%sstarted...%s\n%s\n%s" "$PIPE1" "$BOLD" "$M_GREEN" "$RESET" "$PIPE1" "$RESET"
 
@@ -249,7 +277,7 @@ setup_bombardier() {
   CONNECTIONS='--connections=300'
   RATE_LIMIT='--rate=1000'
   HEADERS='--header="user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109"'
-  echo "\n\n# bombardier alias\nalias boom='clear && bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> "$HOME"/.custom/aliases.sh
+  echo "\n\n# bombardier alias\nalias boom='clear && docker run --rm -it alpine/bombardier --latencies --http2 $CONNECTIONS $HEADERS $DURATION $RATE_LIMIT'\n" >> "$HOME"/.custom/aliases.sh
 
   printf "%s Bombardier setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
@@ -262,14 +290,16 @@ main() {
 
   updating_system
 
-  install_apt curl git tree
+  install_apt curl git tree mosh
 
   setup_custom_config
   setup_tmux
   setup_zsh
   setup_go
   setup_vim
-#  setup_bombardier
+  setup_docker
+  setup_db1000n
+  setup_bombardier
 
   . "$HOME"/.custom/configs.sh
 
