@@ -13,7 +13,7 @@ install_apt() {
   sudo apt install -y "$@" > /dev/null 2>&1
 }
 
-main() {
+install_docker() {
   updating_system
 
   sudo apt remove docker docker-engine docker.io containerd runc > /dev/null 2>&1
@@ -31,7 +31,9 @@ main() {
   updating_system
 
   sudo docker run --name db1000n -d ghcr.io/arriven/db1000n
+}
 
+run_db1000n() {
   if docker ps | grep "db1000n" > /dev/null 2>&1; then
     echo "Running..."
   else
@@ -40,4 +42,5 @@ main() {
   fi
 }
 
-main
+install_docker
+run_db1000n
