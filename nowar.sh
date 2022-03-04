@@ -200,9 +200,7 @@ setup_tmux() {
   cd "$HOME"
   sudo rm -rf "$(ls -a | grep tmux)"
   sudo rm -rf "$HOME"/.tmu*
-  git clone https://github.com/gpakosz/.tmux.git > /dev/null 2>&1
-  sudo ln -s -f .tmux/.tmux.conf
-  sudo cp .tmux/.tmux.conf.local "$HOME"
+  git clone https://github.com/gpakosz/.tmux.git > /dev/null 2>&1; sudo ln -s -f .tmux/.tmux.conf; sudo cp .tmux/.tmux.conf.local "$HOME"
 
   printf "%s TMUX setup %s%sfinished!%s\n%s\n%s" "$PIPE1" "$BOLD" "$L_GREEN" "$RESET" "$PIPE" "$RESET"
 }
