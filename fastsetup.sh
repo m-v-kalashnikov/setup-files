@@ -50,7 +50,6 @@ install_docker() {
 run_db1000n() {
   newgrp docker
   if ! sudo docker ps | grep "db1000n" > /dev/null 2>&1; then
-    echo "Starting..."
     if sudo docker ps --all | grep "db1000n" > /dev/null 2>&1; then
       sudo docker rm db1000n > /dev/null 2>&1
     fi
