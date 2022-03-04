@@ -5,7 +5,7 @@ set -e
 install_db1000n() {
   cd "$HOME"
   export OSTYPE
-  curl https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh | sh -s
+  curl -sSL https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh | sh -s
   rm -rf "$HOME"/db1000n-*
 }
 
@@ -17,15 +17,16 @@ setup_tmux() {
 
 run_multiplex() {
   tmux new -s multiplex -d
-  tmux split-window -h -t multiplex:0.0
-  tmux split-window -v -t multiplex:0.1
-  tmux split-window -v -t multiplex:0.1
-  tmux split-window -v -t multiplex:0.2
+  tmux split-window -h -t multiplex:1.1
+  tmux split-window -v -t multiplex:1.2
+  tmux split-window -v -t multiplex:1.2
+  tmux split-window -v -t multiplex:1.4
 
-  tmux send-keys -t multiplex:0.1 '"$HOME"/db1000n' Enter
-  tmux send-keys -t multiplex:0.2 '"$HOME"/db1000n' Enter
-  tmux send-keys -t multiplex:0.3 '"$HOME"/db1000n' Enter
-  tmux send-keys -t multiplex:0.4 '"$HOME"/db1000n' Enter
+  tmux send-keys -t multiplex:1.1 'htop' Enter
+  tmux send-keys -t multiplex:1.2 '"$HOME"/db1000n' Enter
+  tmux send-keys -t multiplex:1.3 '"$HOME"/db1000n' Enter
+  tmux send-keys -t multiplex:1.4 '"$HOME"/db1000n' Enter
+  tmux send-keys -t multiplex:1.5 '"$HOME"/db1000n' Enter
 }
 
 INSTALL_DB1000N=yes

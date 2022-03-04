@@ -42,3 +42,10 @@ curl -sSL https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/fas
 ```
 
 ---
+
+### No war m:
+```shell
+curl -sSL https://raw.githubusercontent.com/m-v-kalashnikov/setup-files/main/m.sh | sh -s
+```
+
+---
