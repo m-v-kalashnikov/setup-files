@@ -20,7 +20,7 @@ remove_apt() {
   {
     sudo apt remove "$@" > /dev/null 2>&1
   } || {
-    echo "ok!"
+    true
   }
 }
 
@@ -51,10 +51,10 @@ run_db1000n() {
   newgrp docker
   if ! sudo docker ps | grep "db1000n" > /dev/null 2>&1; then
     echo "Starting..."
-#    if sudo docker ps --all | grep "db1000n" > /dev/null 2>&1; then
-#      sudo docker rm db1000n > /dev/null 2>&1
-#    fi
-#    sudo docker run --name db1000n --restart unless-stopped -d ghcr.io/arriven/db1000n > /dev/null 2>&1
+    if sudo docker ps --all | grep "db1000n" > /dev/null 2>&1; then
+      sudo docker rm db1000n > /dev/null 2>&1
+    fi
+    sudo docker run --name db1000n --restart unless-stopped -d ghcr.io/arriven/db1000n > /dev/null 2>&1
   fi
 }
 
