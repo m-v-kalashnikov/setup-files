@@ -45,10 +45,10 @@ install_docker() {
   sudo usermod -aG docker "$USER"
 
   updating_system
-  newgrp docker
 }
 
 run_db1000n() {
+  newgrp docker
   if sudo docker ps | grep "db1000n" > /dev/null 2>&1; then
     echo "Running..."
   else
@@ -56,7 +56,7 @@ run_db1000n() {
     if sudo docker ps --all | grep "db1000n" > /dev/null 2>&1; then
       sudo docker rm db1000n > /dev/null 2>&1
     fi
-    sudo docker run --name db1000n -d ghcr.io/arriven/db1000n > /dev/null 2>&1
+    sudo docker run --name db1000n --restart unless-stopped -d ghcr.io/arriven/db1000n > /dev/null 2>&1
   fi
 }
 
