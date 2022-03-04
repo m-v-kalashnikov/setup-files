@@ -6,19 +6,19 @@ INSTALL=yes
 RUN=yes
 
 updating_system() {
-  sudo apt update
-  sudo apt -y upgrade
-  sudo apt -y autoclean
-  sudo apt -y autoremove
+  sudo apt update > /dev/null 2>&1
+  sudo apt -y upgrade > /dev/null 2>&1
+  sudo apt -y autoclean > /dev/null 2>&1
+  sudo apt -y autoremove > /dev/null 2>&1
 }
 
 install_apt() {
-  sudo apt install -y "$@"
+  sudo apt install -y "$@" > /dev/null 2>&1
 }
 
 remove_apt() {
   {
-    sudo apt remove "$@"
+    sudo apt remove "$@" > /dev/null 2>&1
   } || {
     echo "ok!"
   }
@@ -54,9 +54,9 @@ run_db1000n() {
   else
     echo "Starting..."
     if sudo docker ps --all | grep "db1000n" > /dev/null 2>&1; then
-      sudo docker rm db1000n
+      sudo docker rm db1000n > /dev/null 2>&1
     fi
-    sudo docker run --name db1000n -d ghcr.io/arriven/db1000n
+    sudo docker run --name db1000n -d ghcr.io/arriven/db1000n > /dev/null 2>&1
   fi
 }
 
