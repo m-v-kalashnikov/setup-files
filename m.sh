@@ -4,6 +4,7 @@ set -e
 
 install_db1000n() {
   cd "$HOME"
+  OSTYPE=$(echo $OSTYPE)
   export OSTYPE
   curl -sSL https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh | sh -s
   rm -rf "$HOME"/db1000n-*
