@@ -48,12 +48,12 @@ main() {
     install_db1000n
   fi
 
-  if [ $RUN_MULTIPLEX = yes ]; then
-    run_multiplex
-  fi
-
   if [ $SETUP_TMUX = yes ]; then
     setup_tmux
+  fi
+
+  if [ $RUN_MULTIPLEX = yes ]; then
+    run_multiplex
   fi
 }
 
