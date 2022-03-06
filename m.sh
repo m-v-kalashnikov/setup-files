@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+# set -e
 
 install_db1000n() {
   cd "$HOME"
