@@ -4,7 +4,7 @@ set -e
 
 clear() {
   {
-    tmux kill-session -t multiplex
+    tmux kill-session -t multiplex > /dev/null 2>&1
   } || {
     true
   }
