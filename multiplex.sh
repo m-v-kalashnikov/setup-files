@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 upadte_db1000n() {
   rm -rf ~/db1000n
   source <(curl https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh)
