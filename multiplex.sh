@@ -2,12 +2,6 @@
 
 set -e
 
-upadte_db1000n() {
-  rm -rf ~/db1000n
-  source <(curl -sSL https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh)
-  rm -rf db1000n-* md5*
-}
-
 clear() {
   {
     tmux kill-session -t multiplex
