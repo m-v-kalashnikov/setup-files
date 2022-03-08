@@ -25,7 +25,6 @@ run_in_pane() {
 }
 
 main() {
-  upadte_db1000n
   clear
   run_in_pane "$1" "$2"
   tmux new-window -t multiplex "$3"
