@@ -2,12 +2,16 @@
 
 upadte_db1000n() {
   rm -rf ~/db1000n
-  source <(curl https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh)
+  curl -sSL https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh | sh
   rm -rf db1000n-* md5*
 }
 
 clear() {
-  tmux kill-session -t multiplex
+  {
+    tmux kill-session -t multiplex
+  } || {
+    true
+  }
   tmux new-session -ADs multiplex -d
 }
 
