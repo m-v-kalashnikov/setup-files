@@ -4,7 +4,7 @@ set -e
 
 upadte_db1000n() {
   rm -rf ~/db1000n
-  curl -sSL https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh | sh
+  source <(curl -sSL https://raw.githubusercontent.com/Arriven/db1000n/main/install.sh)
   rm -rf db1000n-* md5*
 }
 
