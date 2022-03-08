@@ -8,7 +8,6 @@ clear() {
   } || {
     true
   }
-  tmux new-session -ADs multiplex -d
 }
 
 run_in_pane() {
@@ -26,6 +25,7 @@ run_in_pane() {
 
 main() {
   clear
+  tmux new-session -ADs multiplex -d
   run_in_pane "$1" "$2"
   tmux new-window -t multiplex "$3"
   tmux kill-window -t multiplex:1
