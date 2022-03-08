@@ -11,13 +11,11 @@ clear() {
 }
 
 run_in_pane() {
-  i=1
-  tmux new-window -t multiplex "$2"
+  i=0
 
   while [ $i -lt "$1" ]
   do
-    tmux split-window -t multiplex:2 "$2"
-    tmux select-layout -t multiplex:2 tiled
+    tmux new-window -t multiplex "$2"
 
     i=$((i+1))
   done
